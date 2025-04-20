@@ -1,11 +1,34 @@
 <script setup lang="ts">
+import { events, state, findTraceFromElement } from 'vite-plugin-vue-tracer/client/overlay'
+import { useDevtoolsClient } from '@nuxt/devtools-kit/iframe-client'
 import { ImagePerformanceIssueType } from '../../../src/runtime/plugins/performance/utils'
 
 definePageMeta({
   title: 'Image Performances',
 })
-
+const client = useDevtoolsClient()
 const { imagePerformances } = useHostPerformancesData()
+
+function mouseOverElement(el?: HTMLElement) {
+  if (!el) {
+    return
+  }
+
+  if (findClosestTraceInfo(el)) {
+    client.value!.host.nuxt.$tracerOverlay.state.main = findClosestTraceInfo((el))
+    client.value!.host.nuxt.$tracerOverlay.state.isVisible = true
+    el.scrollIntoView({
+      behavior: 'smooth',
+    })
+  }
+}
+
+function mouseOutElement(el?: HTMLElement) {
+  if (!el) {
+    return
+  } 
+  client.value!.host.nuxt.$tracerOverlay.state.isVisible = false
+}
 </script>
 
 <template>
@@ -27,6 +50,8 @@ const { imagePerformances } = useHostPerformancesData()
           object-contain
           my-auto
           :title="image.element.src"
+          @mouseover="e => mouseOverElement(image.element as HTMLElement)"
+          @mouseout="e => mouseOutElement(image.element as HTMLElement)"
         >
         <div>
           <p
