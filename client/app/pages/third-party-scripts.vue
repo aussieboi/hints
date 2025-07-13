@@ -39,7 +39,10 @@
               title="log in console"
               @click="log(script.element)"
             >
-              <Icon text-2xl name="material-symbols:terminal" />
+              <Icon
+                text-2xl
+                name="material-symbols:terminal"
+              />
             </button>
           </td>
         </tr>
