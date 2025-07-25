@@ -11,14 +11,6 @@ Nuxt module that shows hints for aspects of your application such as Performance
   <!-- - [🏀 Online playground](https://stackblitz.com/github/your-org/@nuxt/hints?file=playground%2Fapp.vue) -->
   <!-- - [📖 &nbsp;Documentation](https://example.com) -->
 
-## Features
-
-<!-- Highlight some of the features your module provide here -->
-
-- ⛰ &nbsp;Foo
-- 🚠 &nbsp;Bar
-- 🌲 &nbsp;Baz
-
 ## Background
 
 https://github.com/nuxt/image/pull/763
