@@ -7,10 +7,7 @@ export function useHostPerformancesData() {
     throw new Error('`useHostPerformancesData` must be used when the devtools client is connected')
   }
 
-  return {
-    imagePerformances: client.host.nuxt.__hintsPerformances.imagePerformances,
-    hydration: client.host.nuxt.__hintsHydration,
-  }
+  return client.host.nuxt.__hints
 }
 
 export function useHostThirdPartyScripts() {
@@ -24,4 +21,14 @@ export function useHostThirdPartyScripts() {
     scripts: client.host.nuxt.__hints_tpc,
     isUsingNuxtScripts: Boolean(client.host.nuxt.$scripts),
   }
+}
+
+export function useHostNuxt() {
+  const client = useDevtoolsClient().value
+
+  if (!client) {
+    throw new Error('`useHostNuxt` must be used when the devtools client is connected')
+  }
+
+  return client.host.nuxt
 }
